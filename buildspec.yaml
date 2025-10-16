@@ -9,7 +9,9 @@ phases:
 
   build:
     commands:
-      - echo "Preparing Lambda function"
+      - echo "Checking Python syntax..."
+      - python -m py_compile lambda_function.py
+      - echo "Syntax OK, preparing Lambda function"
 
 artifacts:
   files:
