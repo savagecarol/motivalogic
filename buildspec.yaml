@@ -1,0 +1,14 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      python: 3.11
+    commands:
+      - pip install -r app/requirements.txt
+  build:
+    commands:
+      - echo "Build phase complete"
+artifacts:
+  files:
+    - '**/*'
