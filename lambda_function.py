@@ -2,12 +2,10 @@ import json
 
 
 def lambda_handler(event, context):
-
-
     # Get HTTP method
     http_method = event.get("httpMethod")
 
-    # Get path if you want separate endpoints
+    # Get path
     path = event.get("path", "/")
 
     # Default response
@@ -20,26 +18,29 @@ def lambda_handler(event, context):
     }
 
     try:
-        if http_method == "GET":
-            response["body"] = json.dumps({"message": "GET request successful"})
+        # Handle base /lambda path
+        if path == "/lambda":
+            if http_method == "GET":
+                response["body"] = json.dumps({"message": "GET request successful"})
+            elif http_method == "POST":
+                body = json.loads(event.get("body", "{}"))
+                response["body"] = json.dumps({"message": "POST request successful", "data": body})
+            elif http_method == "PUT":
+                body = json.loads(event.get("body", "{}"))
+                response["body"] = json.dumps({"message": "PUT request successful", "data": body})
+            elif http_method == "DELETE":
+                response["body"] = json.dumps({"message": "DELETE request successful"})
+            else:
+                response["statusCode"] = 400
+                response["body"] = json.dumps({"message": "Unsupported method"})
 
-        elif http_method == "POST":
-            body = json.loads(event.get("body", "{}"))
-            response["body"] = json.dumps({"message": "POST request successful", "data": body})
-
-        elif http_method == "PUT":
-            body = json.loads(event.get("body", "{}"))
-            response["body"] = json.dumps({"message": "PUT request successful", "data": body})
-
-        elif http_method == "DELETE":
-            response["body"] = json.dumps({"message": "DELETE request successful"})
-
-        elif path == "/custom":
+        # Handle custom endpoint
+        elif path.endswith("/custom"):
             response["body"] = json.dumps({"message": "Custom endpoint reached"})
 
         else:
             response["statusCode"] = 400
-            response["body"] = json.dumps({"message": "Unsupported method"})
+            response["body"] = json.dumps({"message": "Unsupported path"})
 
     except Exception as e:
         response["statusCode"] = 500
