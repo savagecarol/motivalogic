@@ -5,22 +5,26 @@ phases:
     runtime-versions:
       python: 3.11
     commands:
-      - echo "Installing dependencies"
+      - echo "Installing dependencies into package"
       - pip install --upgrade pip
-      - pip install -r requirements.txt -t build_output/
+      # Install dependencies directly into package folder
+      - pip install -r requirements.txt -t package/
 
   build:
     commands:
       - echo "Compiling Python files"
-      - python -m compileall build_output/
+      - python -m compileall package/
 
   post_build:
     commands:
       - echo "Copying Lambda code"
-      - cp main.py build_output/
-
+      - cp main.py package/
+      - echo "Zipping Lambda package"
+      - cd package
+      - zip -r ../lambda_package.zip .
+      - cd ..
 
 artifacts:
   files:
-    - build_output/**/*
-  discard-paths: no
+    - lambda_package.zip
+  discard-paths: yes
