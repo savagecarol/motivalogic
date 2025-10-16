@@ -1,0 +1,19 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      python: 3.11
+    commands:
+      - pip install requests
+  build:
+    commands:
+      - echo "Running FastAPI health check..."
+      - |
+        RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" http://<EC2_PUBLIC_IP>:8000/health)
+        if [ "$RESPONSE" -ne 200 ]; then
+          echo "Health check failed!"
+          exit 1
+        else
+          echo "Health check passed!"
+        fi

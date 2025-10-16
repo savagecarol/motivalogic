@@ -11,7 +11,7 @@ phases:
   pre_build:
     commands:
       - echo "Running pre-build checks..."
-      - python -m compileall app  # checks for syntax errors
+      - python -m compileall app
   build:
     commands:
       - echo "Running build phase..."
