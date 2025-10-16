@@ -1,13 +1,27 @@
 version: 0.2
+
 phases:
   install:
     runtime-versions:
-      python: 3.9
+      python: 3.11
     commands:
-      - pip install -r requirements.txt -t .
+      - echo "Installing dependencies"
+      - pip install --upgrade pip
+      - pip install -r requirements.txt
+
   build:
     commands:
-      - zip -r ../deployment-package.zip .
+      - echo "Compiling Python files"
+      - python -m compileall .
+
+  post_build:
+    commands:
+      - echo "Copying artifacts"
+      - mkdir -p build_output
+      - cp main.py build_output/
+      - cp requirements.txt build_output/
+
 artifacts:
   files:
-    - ../deployment-package.zip
+    - build_output/**/*
+  discard-paths: yes
