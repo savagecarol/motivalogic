@@ -8,14 +8,17 @@ phases:
       - echo "Installing dependencies..."
       - pip install --upgrade pip
       - pip install -r requirements.txt
+
   pre_build:
     commands:
       - echo "Running pre-build checks..."
       - python -m compileall .
+
   build:
     commands:
       - echo "Running build phase..."
       - echo "Optional: run tests here if you have them"
+
   post_build:
     commands:
       - echo "Build complete, preparing artifacts..."
