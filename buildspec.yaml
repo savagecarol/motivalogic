@@ -16,3 +16,4 @@ phases:
 artifacts:
   files:
     - lambda_function.py
+    - appspec.yml
