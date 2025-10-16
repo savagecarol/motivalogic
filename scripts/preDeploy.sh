@@ -1,4 +1,3 @@
 #!/bin/bash
-docker stop fastapi-app || true
-docker rm fastapi-app || true
-echo "PreDeploy: old container stopped/removed."
+echo "Stopping any existing FastAPI app..."
+pkill -f "uvicorn main:app" || true

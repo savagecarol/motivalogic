@@ -1,8 +1,10 @@
 version: 0.0
 os: linux
+
 files:
   - source: /
     destination: /home/ec2-user/fastapi-app
+    overwrite: true
 
 hooks:
   BeforeInstall:
@@ -13,9 +15,4 @@ hooks:
   ApplicationStart:
     - location: scripts/postDeploy.sh
       timeout: 300
-      runas: ec2-user
-
-  ValidateService:
-    - location: scripts/validate.sh
-      timeout: 60
       runas: ec2-user
