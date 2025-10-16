@@ -1,0 +1,9 @@
+version: 0.0
+Resources:
+  - myLambdaFunction:
+      Type: AWS::Lambda::Function
+      Properties:
+        Name: lambda
+        Alias: prod
+        CurrentVersion: 23
+        TargetVersion: 24
