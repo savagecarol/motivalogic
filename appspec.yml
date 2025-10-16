@@ -1,14 +1,11 @@
-version: 0.0
 Resources:
   - myLambdaFunction:
       Type: AWS::Lambda::Function
       Properties:
         Name: lambda
         Alias: prod
-        CurrentVersion: 25
-        TargetVersion: 26
         DeploymentPreference:
           Type: AllAtOnce
           Alarms:
             - errors
-
+        AutoPublishAlias: true
