@@ -11,3 +11,4 @@ Resources:
           Type: AllAtOnce
           Alarms:
             - errors
+
