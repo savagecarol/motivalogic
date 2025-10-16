@@ -7,21 +7,19 @@ phases:
     commands:
       - echo "Installing dependencies"
       - pip install --upgrade pip
-      - pip install -r requirements.txt
+      - pip install -r requirements.txt -t build_output/
 
   build:
     commands:
       - echo "Compiling Python files"
-      - python -m compileall .
+      - python -m compileall build_output/
 
   post_build:
     commands:
-      - echo "Copying artifacts"
-      - mkdir -p build_output
+      - echo "Copying Lambda code"
       - cp main.py build_output/
-      - cp requirements.txt build_output/
 
 artifacts:
   files:
     - build_output/**/*
-  discard-paths: yes
+  discard-paths: no
