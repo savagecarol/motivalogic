@@ -6,7 +6,7 @@ Resources:
         Name: lambda
         Alias: prod
         CurrentVersion: 25
-        TargetVersion: 27
+        TargetVersion: 28
         DeploymentPreference:
           Type: AllAtOnce
           Alarms:
