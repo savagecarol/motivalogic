@@ -5,5 +5,5 @@ Resources:
       Properties:
         Name: lambda
         Alias: prod
-        CurrentVersion: 23
+        CurrentVersion: 24
         TargetVersion: 25
