@@ -5,21 +5,13 @@ phases:
     runtime-versions:
       python: 3.11
     commands:
-      - echo "Upgrading pip..."
-      - pip install --upgrade pip
-      - echo "Installing dependencies into build folder..."
-      - pip install -r requirements.txt -t build/
+      - echo "No dependencies to install"
 
   build:
     commands:
-      - echo "Copying Lambda function code..."
-      - cp main.py build/
-      - echo "Zipping Lambda package..."
-      - cd build
-      - zip -r ../lambda_package.zip .
-      - cd ..
+      - echo "Packaging Lambda function"
+      - zip -r lambda_package.zip lambda_function.py
 
 artifacts:
   files:
     - lambda_package.zip
-  discard-paths: yes
