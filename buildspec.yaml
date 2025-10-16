@@ -5,23 +5,18 @@ phases:
     runtime-versions:
       python: 3.11
     commands:
-      - echo "Installing dependencies..."
+      - echo "Installing dependencies"
       - pip install --upgrade pip
       - pip install -r requirements.txt
 
-  pre_build:
-    commands:
-      - echo "Running pre-build checks..."
-      - python -m compileall .
-
   build:
     commands:
-      - echo "Running build phase..."
-      - echo "Optional: run tests here if you have them"
+      - echo "Compiling Python files"
+      - python -m compileall .
 
   post_build:
     commands:
-      - echo "Build complete, preparing artifacts..."
+      - echo "Copying artifacts"
       - mkdir -p build_output
       - cp main.py build_output/
       - cp requirements.txt build_output/
