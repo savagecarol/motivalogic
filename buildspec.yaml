@@ -19,6 +19,7 @@ phases:
       - echo "Copying Lambda code"
       - cp main.py build_output/
 
+
 artifacts:
   files:
     - build_output/**/*
