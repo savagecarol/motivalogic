@@ -6,4 +6,4 @@ Resources:
         Name: lambda
         Alias: prod
         CurrentVersion: 23
-        TargetVersion: 24
+        TargetVersion: 25
