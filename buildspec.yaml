@@ -11,7 +11,7 @@ phases:
   pre_build:
     commands:
       - echo "Running pre-build checks..."
-      - python -m compileall app
+      - python -m compileall .
   build:
     commands:
       - echo "Running build phase..."
@@ -20,7 +20,8 @@ phases:
     commands:
       - echo "Build complete, preparing artifacts..."
       - mkdir -p build_output
-      - cp -r app/* build_output/
+      - cp main.py build_output/
+      - cp requirements.txt build_output/
 
 artifacts:
   files:
